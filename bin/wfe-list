@@ -18,9 +18,9 @@ process.on('exit', () => {
  */
 
 request({
-  url: 'https://api.github.com/users/vuejs-templates/repos',
+  url: 'https://api.github.com/users/wfe-templates/repos',
   headers: {
-    'User-Agent': 'vue-cli'
+    'User-Agent': 'wfe-cli'
   }
 }, (err, res, body) => {
   if (err) logger.fatal(err)

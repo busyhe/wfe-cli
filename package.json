@@ -1,6 +1,6 @@
 {
     "name": "wfe-cli",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "web frontend build",
     "preferGlobal": true,
     "scripts": {
