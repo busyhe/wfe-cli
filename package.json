@@ -1,6 +1,6 @@
 {
     "name": "wfe-cli",
-    "version": "0.0.7",
+    "version": "0.1.0",
     "description": "web frontend build",
     "preferGlobal": true,
     "scripts": {
@@ -53,5 +53,8 @@
         "eslint-plugin-vue-libs": "^1.2.1",
         "execa": "^0.8.0",
         "mocha": "^3.5.3"
+    },
+    "engines": {
+        "node": ">=6.0.0"
     }
 }
