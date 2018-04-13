@@ -1,10 +1,10 @@
 {
     "name": "wfe-cli",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "web frontend build",
     "preferGlobal": true,
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "npm run e2e"
     },
     "bin": {
         "wfe": "bin/wfe",
