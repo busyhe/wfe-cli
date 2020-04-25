@@ -14,7 +14,7 @@ const logger = require('../lib/logger');
 const generate = require('../lib/generate');
 const checkVersion = require('../lib/check-version');
 const warnings = require('../lib/warnings');
-const localPath = require('../lib/local-path');
+const localPath = require('../lib/local-pth');
 
 const isLocalPath = localPath.isLocalPath;
 const getTemplatePath = localPath.getTemplatePath;
