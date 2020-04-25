@@ -9,13 +9,17 @@
 
 ```bash
 # 全局安转wfe-cli
-$ npm install wfe-cli -g
+npm install wfe-cli -g
+# or
+yarn global add wfe-cli
 
 # 查看当前模板列表
-$ npm list
+wfe
+# or
+wfe list
 
 # 使用模板
-$ npm init <templatename> <you project name>
+wfe init <templatename> <you custom project name>
 ```
 
 
