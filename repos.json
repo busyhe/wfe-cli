@@ -2,9 +2,5 @@
     "wfe": {
         "templates": "wfe-templates",
         "repos": "https://api.github.com/users/wfe-templates/repos"
-    },
-    "kfz": {
-        "templates": "fe-templates",
-        "repos": "https://git.zuoshouyisheng.com/api/v4/groups/90/projects?private_token=5DsmdxZzAuEPe992s6zy&order_by=created_at&per_page=1000"
     }
 }
