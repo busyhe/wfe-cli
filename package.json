@@ -4,6 +4,7 @@
     "description": "web frontend build",
     "preferGlobal": true,
     "scripts": {
+        "release": "release-it --config .release-it.json",
         "test": "npm run e2e"
     },
     "bin": {
@@ -27,33 +28,36 @@
     "homepage": "https://github.com/wfe-cli/wfe-cli#readme",
     "dependencies": {
         "async": "^3.2.0",
-        "chalk": "^4.0.0",
+        "chalk": "^4.1.0",
         "coffee-script": "1.12.7",
-        "commander": "^5.1.0",
-        "consolidate": "^0.15.1",
+        "commander": "^6.2.0",
+        "consolidate": "^0.16.0",
+        "dayjs": "^1.9.6",
         "download-git-repo": "^3.0.2",
         "handlebars": "^4.7.6",
-        "inquirer": "^7.1.0",
+        "inquirer": "^7.3.3",
         "inquirer-checkbox-plus-prompt": "^1.0.1",
         "metalsmith": "^2.3.0",
         "minimatch": "^3.0.4",
-        "multimatch": "^4.0.0",
-        "ora": "^4.0.4",
+        "multimatch": "^5.0.0",
+        "ora": "^5.1.0",
         "read-metadata": "^1.0.0",
         "request": "^2.88.2",
         "rimraf": "^3.0.2",
         "semver": "^7.3.2",
         "tildify": "^2.0.0",
-        "uid": "1.0.0",
+        "uid": "2.0.0",
         "user-home": "^2.0.0",
         "validate-npm-package-name": "^3.0.0"
     },
     "devDependencies": {
+        "@release-it/keep-a-changelog": "^2.1.0",
         "chai": "^4.2.0",
-        "eslint": "^6.8.0",
+        "eslint": "^7.13.0",
         "eslint-plugin-vue-libs": "^4.0.0",
-        "execa": "^4.0.0",
-        "mocha": "^7.1.1"
+        "execa": "^4.1.0",
+        "mocha": "^8.2.1",
+        "release-it": "^14.2.1"
     },
     "engines": {
         "node": ">=6.0.0"
