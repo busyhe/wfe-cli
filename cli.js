@@ -26,10 +26,12 @@ const download = require('download-git-repo');
 const generate = require('./lib/generate');
 const home = require('user-home');
 dayjs.extend(relativeTime);
+inquirer.registerPrompt('checkbox-plus', require('inquirer-checkbox-plus-prompt'));
 
 const HOME_PATH = process.env[isWindows() ? 'USERPROFILE' : 'HOME'];
 const WFE_CLI_REPOS_RC = path.join(HOME_PATH, '.wfe_cli_repos_rc');
-const DEFAULT_REPO = 'wfe';
+const DEFAULT_REPO = 'wfe'; // 默认repo
+const KFZ_TEMPLATES = 'fe-templates' // 私有化库地址
 
 program.version(package.version);
 
@@ -97,21 +99,21 @@ async function initProject(projectName, opts) {
 }
 
 function downloadAndGenerate(projectName, template) {
-    console.log(projectName, template);
     const repo = getCurrentRepo();
+    const isKfz = repo.templates === KFZ_TEMPLATES
     const inPlace = !projectName || projectName === '.';
     const name = inPlace ? path.relative('../', process.cwd()) : projectName;
     const tmp = path.join(home, `.${repo.templates}`, template.replace(/[\/:]/g, '-')); // 本地存储模板路径
     const to = path.resolve(projectName || '.'); // 目标路径
+    template = isKfz ? `direct:git@git.zuoshouyisheng.com:frontend/fe-cli/${repo.templates}/${template}.git` : `${repo.templates}/${template}`
 
     const spinner = ora('downloading template');
     spinner.start();
     // Remove if local template exists
-    console.log('tmp', tmp);
-    console.log('to', to);
-    console.log('name', name);
     if (exists(tmp)) rm(tmp);
-    download(template, tmp, false, err => {
+    download(template, tmp, {
+        clone: isKfz // 如果使用私有化模板库则clone
+    }, err => {
         spinner.stop();
         if (err) logger.fatal('Failed to download repo ' + template + ': ' + err.message.trim());
         generate(name, tmp, to, err => {
