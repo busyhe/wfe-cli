@@ -2,22 +2,27 @@
 
 const logger = require('../lib/logger');
 const request = require('request');
+const {Command} = require('commander');
 const chalk = require('chalk');
 const dayjs = require('dayjs');
 const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-console.log();
+const program = new Command();
+program.option('-r, --repo <url>', 'use git repo url')
+program.parse(process.argv);
+
 process.on('exit', () => {
     console.log();
 });
 
+const repo = program.opts().repo
+
 /**
  * List repos.
  */
-
 request({
-    url: 'https://api.github.com/users/wfe-templates/repos',
+    url: repo || 'https://api.github.com/users/wfe-templates/repos',
     headers: {
         'User-Agent': 'wfe-cli'
     }
@@ -32,10 +37,10 @@ request({
                 '  ' + chalk.yellow('★') +
                 '  ' + chalk.blue(repo.name) +
                 ' - ' + repo.description +
-                '  ' + chalk.gray(dayjs(repo.updated_at).fromNow()));
+                '  ' + chalk.gray(dayjs(repo.updated_at || repo.last_activity_at).fromNow()));
         });
         console.log();
-        console.log(chalk.gray(`  Ratelimit-Remaining: ${res.headers['x-ratelimit-remaining']}`));
+        res.headers['x-ratelimit-remaining'] && console.log(chalk.gray(`  Ratelimit-Remaining: ${res.headers['x-ratelimit-remaining']}`));
     } else {
         // 速率限制
         if (requestBody.message.indexOf('API rate limit exceeded') >= 0) {
