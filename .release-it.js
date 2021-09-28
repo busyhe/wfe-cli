@@ -11,23 +11,11 @@ module.exports = {
         'tag': true,
         'tagName': 'v${version}',
         'tagAnnotation': 'v${version}',
-        'push': true,
-        'pushArgs': [
-            '--follow-tags'
-        ],
-        'pushRepo': ''
-    },
-    gitlab: {
-        release: true,
-        releaseName: 'v${version}',
-        tokenRef: 'KFZ_GITLAB_TOKEN',
-        assets: [
-            'dist/*.zip'
-        ]
+        'push': true
     },
     'github': {
         'release': true,
-        'releaseName': 'Release ${version}',
+        'releaseName': 'v${version}',
         'releaseNotes': null,
         'preRelease': false,
         'draft': false,
