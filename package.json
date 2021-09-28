@@ -39,7 +39,7 @@
         "consolidate": "^0.16.0",
         "dayjs": "^1.9.6",
         "download-git-repo": "^3.0.2",
-        "handlebars": "^4.7.6",
+        "handlebars": "^4.7.7",
         "inquirer": "^7.3.3",
         "inquirer-checkbox-plus-prompt": "^1.0.1",
         "metalsmith": "^2.3.0",
