@@ -15,6 +15,7 @@ const generate = require('../lib/generate');
 const checkVersion = require('../lib/check-version');
 const warnings = require('../lib/warnings');
 const localPath = require('../lib/local-path');
+const {Command} = require('commander');
 
 const isLocalPath = localPath.isLocalPath;
 const getTemplatePath = localPath.getTemplatePath;
@@ -23,6 +24,7 @@ inquirer.registerPrompt('checkbox-plus', require('inquirer-checkbox-plus-prompt'
 
 program
     .usage('<template-name> [project-name]')
+    .option('-r, --repo <url>', 'use git repo url')
     .option('-c, --clone', 'use git clone')
     .option('--offline', 'use cached template');
 
@@ -61,6 +63,7 @@ const inPlace = !rawName || rawName === '.';
 const name = inPlace ? path.relative('../', process.cwd()) : rawName;
 const to = path.resolve(rawName || '.');
 const clone = program.clone || false;
+const repo = program.opts().repo
 
 const tmp = path.join(home, '.wfe-templates', template.replace(/[\/:]/g, '-'));
 if (program.offline) {
