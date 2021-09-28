@@ -1,7 +1,7 @@
 module.exports = {
     'git': {
         'changelog': 'npx auto-changelog --stdout --commit-limit false --unreleased --template changelog.hbs',
-        'requireCleanWorkingDir': true,
+        'requireCleanWorkingDir': false,
         'requireBranch': false,
         'requireUpstream': true,
         'requireCommits': false,
@@ -41,17 +41,14 @@ module.exports = {
     'npm': {
         'publish': true,
         'publishPath': '.',
+        'publishConfig': {
+            'access': 'public'
+        },
         'tag': null,
         'otp': null,
-        'ignoreVersion': false,
+        'ignoreVersion': false, // 忽略版本
         'skipChecks': false,
         'timeout': 10
-    },
-    'plugins': {
-        '@release-it/keep-a-changelog': {
-            'strictLatest': false,
-            'filename': 'CHANGELOG.md'
-        }
     },
     'hooks': {
         'after:bump': 'npx auto-changelog -p',
