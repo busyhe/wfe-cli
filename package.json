@@ -12,11 +12,8 @@
         "postinstall": "husky install"
     },
     "bin": {
-        "wfe": "bin/wfe",
-        "wfe-init": "bin/wfe-list",
-        "wfe-list": "bin/wfe-list"
+        "wfe": "./cli.js"
     },
-    "main": "index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/wfe-cli/wfe-cli.git"
@@ -39,6 +36,7 @@
         "dayjs": "^1.10.7",
         "download-git-repo": "^3.0.2",
         "handlebars": "^4.7.7",
+        "ini": "^2.0.0",
         "inquirer": "^8.1.5",
         "inquirer-checkbox-plus-prompt": "^1.0.1",
         "metalsmith": "^2.3.0",

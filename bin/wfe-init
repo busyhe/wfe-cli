@@ -15,7 +15,6 @@ const generate = require('../lib/generate');
 const checkVersion = require('../lib/check-version');
 const warnings = require('../lib/warnings');
 const localPath = require('../lib/local-path');
-const {Command} = require('commander');
 
 const isLocalPath = localPath.isLocalPath;
 const getTemplatePath = localPath.getTemplatePath;
@@ -123,8 +122,6 @@ function run() {
                         warnings.v2SuffixTemplatesDeprecated(template, inPlace ? '' : name);
                         return;
                     }
-
-                    // warnings.v2BranchIsNowDefault(template, inPlace ? '' : name)
                     downloadAndGenerate(officialTemplate);
                 }
             } else {
