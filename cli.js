@@ -26,18 +26,19 @@ program.command('init', 'generate a new project from a template');
 
 program.command('list', 'list available official templates');
 
-// reposProgram
 const reposProgram = program.command('repos');
 
 reposProgram
-    .description('list all the repos')
     .command('ls')
     .action(showRepos);
 
 reposProgram
-    .description('Change repo to current')
     .command('use <template>')
     .action(useRepo);
+
+reposProgram
+    .command('add <name> <repo> [template]')
+    .action(addRepo);
 
 if (process.argv.length === 2) {
     program.outputHelp();
@@ -79,11 +80,38 @@ function showRepos() {
  */
 function useRepo(repoName) {
     const allRepos = getRepos();
-    const {repos: customRepos, current: currentRepo} = getCustomRepos();
     if (!allRepos[repoName]) {
         console.log('');
         logger.error('Not find repo ' + repoName);
+        return
     }
+    let customRepos = getCustomRepos();
+    customRepos = Object.assign({}, customRepos, {
+        current: repoName
+    })
+    setCustomRepos(customRepos)
+}
+
+/**
+ * 添加自定义repo
+ * @param repoName
+ * @param repo
+ * @param template
+ */
+function addRepo(repoName, repo, template = repoName) {
+    const allRepos = getRepos();
+    if (allRepos[repoName]) {
+        console.log('');
+        logger.error(`repo ${repoName} is existed`);
+        return
+    }
+    const customRepos = getCustomRepos();
+    console.log(customRepos);
+    customRepos.repos[repoName] = {
+        templates: template,
+        repos: repo
+    }
+    setCustomRepos(customRepos)
 }
 
 /**
@@ -124,7 +152,7 @@ function getCustomRepos() {
  * 设置自定义repos
  * @param repo
  */
-function setCustomRepos(repo) {
-    const repos = getCustomRepos();
+function setCustomRepos(repos) {
+    console.log('setCustomRepos', repos);
     fs.writeFileSync(WFE_CLI_REPOS_RC, ini.stringify(repos));
 }
