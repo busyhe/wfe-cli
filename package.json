@@ -24,7 +24,7 @@
         "wf"
     ],
     "author": "busyhe",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/wfe-cli/wfe-cli/issues"
     },
