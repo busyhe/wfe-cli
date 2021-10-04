@@ -10,8 +10,7 @@
     "preferGlobal": true,
     "scripts": {
         "release": "release-it",
-        "release:debug": "DEBUG=release-it:* release-it",
-        "postinstall": "husky install"
+        "release:debug": "DEBUG=release-it:* release-it"
     },
     "bin": {
         "wfe": "./cli.js"
@@ -47,7 +46,6 @@
         "multimatch": "^5.0.0",
         "ora": "^5.1.0",
         "read-metadata": "^1.0.0",
-        "request": "^2.88.2",
         "rimraf": "^3.0.2",
         "semver": "^7.3.5",
         "tildify": "^3.0.0",
