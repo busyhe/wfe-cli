@@ -202,7 +202,7 @@ function useRepo(repoName) {
         current: repoName
     });
     setCustomRepos(customRepos);
-    logger.log(repoName + ' : ' + allRepos[repoName].repos);
+    logger.log(repoName + ' : ' + allRepos[repoName].templates + '-' + allRepos[repoName].repos);
 }
 
 /**
@@ -224,6 +224,7 @@ function addRepo(repoName, repo, template = repoName) {
         repos: repo
     };
     setCustomRepos(customRepos);
+    logger.log(template + ' : ' + template + '-' + repo);
 }
 
 /**
