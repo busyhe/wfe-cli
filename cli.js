@@ -9,15 +9,22 @@ const fs = require('fs');
 const path = require('path');
 const ini = require('ini');
 const chalk = require('chalk');
+const inquirer = require('inquirer');
 const {Command} = require('commander');
 const program = new Command();
-const package = require('./package.json')
+const package = require('./package.json');
 const {isWindows} = require('./utils');
 const logger = require('./lib/logger');
 const LOCAL_REPOS = require('./repos.json');
-const request = require('request');
+const axios = require('axios');
 const dayjs = require('dayjs');
 const relativeTime = require('dayjs/plugin/relativeTime');
+const ora = require('ora');
+const {existsSync: exists} = require('fs');
+const {sync: rm} = require('rimraf');
+const download = require('download-git-repo');
+const generate = require('./lib/generate');
+const home = require('user-home');
 dayjs.extend(relativeTime);
 
 const HOME_PATH = process.env[isWindows() ? 'USERPROFILE' : 'HOME'];
@@ -30,8 +37,9 @@ program.usage('<command> [options]');
 
 program
     .description('generate a new project from a template')
-    .command('init')
-    .action(initProject)
+    .command('init <project>')
+    .option('-t, --template <template>', 'by template')
+    .action(initProject);
 
 program
     .description('list available official templates')
@@ -62,44 +70,94 @@ process.on('exit', () => {
     console.log();
 });
 
-function initProject() {
+async function initProject(projectName, opts) {
+    let {template} = opts;
+    if (!template) {
+        const templatesRes = await getRepoTemplates();
+        const templatesData = templatesRes.data;
+        const len = Math.max(...templatesData.map(key => key.name.length)) + 1;
+        let templates = templatesData.map(item => {
+            return {
+                name: item.name + chalk.gray(line(item.name, len) + item.description) + ' ' + chalk.gray(dayjs(item.updated_at || item.last_activity_at).fromNow()),
+                value: item.name
+            };
+        });
+        const {template: selectTmp} = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'template',
+                message: 'create project should by a template?',
+                choices: templates
+            }]
+        );
+        template = selectTmp
+    }
+    downloadAndGenerate(projectName, template)
+
+}
+
+function downloadAndGenerate(projectName, template) {
+    console.log(projectName, template);
+    const repo = getCurrentRepo();
+    const inPlace = !projectName || projectName === '.';
+    const name = inPlace ? path.relative('../', process.cwd()) : projectName;
+    const tmp = path.join(home, `.${repo.templates}`, template.replace(/[\/:]/g, '-')); // 本地存储模板路径
+    const to = path.resolve(projectName || '.'); // 目标路径
+
+    const spinner = ora('downloading template');
+    spinner.start();
+    // Remove if local template exists
+    console.log('tmp', tmp);
+    console.log('to', to);
+    console.log('name', name);
+    if (exists(tmp)) rm(tmp);
+    download(template, tmp, false, err => {
+        spinner.stop();
+        if (err) logger.fatal('Failed to download repo ' + template + ': ' + err.message.trim());
+        generate(name, tmp, to, err => {
+            if (err) logger.fatal(err);
+            console.log();
+            logger.success('Generated "%s".', name);
+        });
+    });
+}
+
+async function getRepoTemplates() {
+    const currentRepo = getCurrentRepo();
+    return axios.get(currentRepo.repos, {}, {
+        headers: {
+            'User-Agent': package.name
+        }
+    });
 }
 
 /**
  * 显示模板列表
  */
-function showTemplates() {
-    const currentRepo = getCurrentRepo();
-    request({
-        url: currentRepo.repos,
-        headers: {
-            'User-Agent': package.name
+async function showTemplates() {
+    const res = await getRepoTemplates();
+    const requestBody = res.data;
+    if (Array.isArray(requestBody)) {
+        console.log();
+        console.log('  Available templates:');
+        console.log();
+        requestBody.forEach(repo => {
+            console.log(
+                '  ' + chalk.yellow('★') +
+                '  ' + chalk.blue(repo.name) +
+                ' - ' + repo.description +
+                '  ' + chalk.gray(dayjs(repo.updated_at || repo.last_activity_at).fromNow()));
+        });
+        console.log();
+        res.headers['x-ratelimit-remaining'] && console.log(chalk.gray(`  Ratelimit-Remaining: ${res.headers['x-ratelimit-remaining']}`));
+    } else {
+        // 速率限制
+        if (requestBody.message.indexOf('API rate limit exceeded') >= 0) {
+            console.log(chalk.yellow(`ratelimit-reset: ${dayjs.unix(res.headers['x-ratelimit-reset']).format('YYYY-MM-DD HH:mm:ss')}`));
+            console.log();
         }
-    }, (err, res, body) => {
-        if (err) logger.fatal(err);
-        const requestBody = JSON.parse(body);
-        if (Array.isArray(requestBody)) {
-            console.log();
-            console.log('  Available templates:');
-            console.log();
-            requestBody.forEach(repo => {
-                console.log(
-                    '  ' + chalk.yellow('★') +
-                    '  ' + chalk.blue(repo.name) +
-                    ' - ' + repo.description +
-                    '  ' + chalk.gray(dayjs(repo.updated_at || repo.last_activity_at).fromNow()));
-            });
-            console.log();
-            res.headers['x-ratelimit-remaining'] && console.log(chalk.gray(`  Ratelimit-Remaining: ${res.headers['x-ratelimit-remaining']}`));
-        } else {
-            // 速率限制
-            if (requestBody.message.indexOf('API rate limit exceeded') >= 0) {
-                console.log(chalk.yellow(`ratelimit-reset: ${dayjs.unix(res.headers['x-ratelimit-reset']).format('YYYY-MM-DD HH:mm:ss')}`));
-                console.log();
-            }
-            console.log(chalk.red(requestBody.message));
-        }
-    });
+        console.log(chalk.red(requestBody.message));
+    }
 }
 
 /**
@@ -142,7 +200,7 @@ function useRepo(repoName) {
         current: repoName
     });
     setCustomRepos(customRepos);
-    logger.log(repoName + ' : ' + allRepos[repoName].repos)
+    logger.log(repoName + ' : ' + allRepos[repoName].repos);
 }
 
 /**
