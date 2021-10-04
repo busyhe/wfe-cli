@@ -29,9 +29,6 @@ module.exports = {
     'npm': {
         'publish': true,
         'publishPath': '.',
-        'publishConfig': {
-            'access': 'public'
-        },
         'tag': null,
         'otp': null,
         'ignoreVersion': false, // 忽略版本

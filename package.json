@@ -1,14 +1,16 @@
 {
     "name": "wfe-cli",
-    "version": "1.1.6",
+    "version": "1.2.1",
     "description": "web frontend build",
     "private": false,
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
     },
     "preferGlobal": true,
     "scripts": {
         "release": "release-it",
+        "release:debug": "DEBUG=release-it:* release-it",
         "postinstall": "husky install"
     },
     "bin": {
