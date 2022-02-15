@@ -1,26 +1,36 @@
 # wfe-cli
 
-> 前端开发与构建工具
+> Frontend Quick Start Init Project
 
-## 安装
+## Installation
 
 ```shell
 npm install wfe-cli -g
-```
-
-## 使用说明
-
-### 查看当前模板列表
-
-```shell
-wfe
 # or
-wfe list
+yarn global add wfe-cli
 ```
 
-### 使用模板
+## Getting Started
+
+### Templates
+
 ```shell
-wfe init <templatename> <you custom project name>
+# get template list
+wfe list
+
+# init project
+wfe init <template> <projectName>
 ```
 
-### 自定义repos模板地址
+### Repos
+
+```shell
+# get repo list
+wfe repos list
+
+# use repo
+wfe repos use <repo>
+
+# add repo
+wfe repos add <reponame> <reposUrl>
+```
