@@ -27,9 +27,6 @@ program
     .option('-c, --clone', 'use git clone')
     .option('--offline', 'use cached template');
 
-/**
- * Help.
- */
 program.on('--help', () => {
     console.log('  Examples:');
     console.log();
@@ -44,7 +41,6 @@ program.on('--help', () => {
 /**
  * Help.
  */
-
 function help() {
     program.parse(process.argv);
     if (program.args.length < 1) return program.help();
@@ -62,7 +58,7 @@ const inPlace = !rawName || rawName === '.';
 const name = inPlace ? path.relative('../', process.cwd()) : rawName;
 const to = path.resolve(rawName || '.');
 const clone = program.clone || false;
-const repo = program.opts().repo
+const repo = program.opts().repo;
 
 const tmp = path.join(home, '.wfe-templates', template.replace(/[\/:]/g, '-'));
 if (program.offline) {

@@ -5,7 +5,6 @@ const program = new Command();
 program.version(require('../package').version).usage('<command> [options]');
 
 program.command('init', 'generate a new project from a template');
-
 program.command('list', 'list available official templates')
 
 program.parse(process.argv);

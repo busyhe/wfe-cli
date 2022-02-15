@@ -9,7 +9,8 @@
     },
     "preferGlobal": true,
     "scripts": {
-        "release": "release-it",
+        "postinstall": "husky install",
+        "release": "HUSKY=0 release-it",
         "release:debug": "DEBUG=release-it:* release-it"
     },
     "bin": {
