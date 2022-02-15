@@ -30,7 +30,7 @@ inquirer.registerPrompt('checkbox-plus', require('inquirer-checkbox-plus-prompt'
 const HOME_PATH = process.env[isWindows() ? 'USERPROFILE' : 'HOME'];
 const WFE_CLI_REPOS_RC = path.join(HOME_PATH, '.wfe_cli_repos_rc');
 const DEFAULT_REPO = 'wfe'; // 默认repo
-const KFZ_TEMPLATES = 'fe-templates' // 私有化库地址
+const KFZ_TEMPLATES = 'fe-templates'; // 私有化库地址
 
 program.version(Package.version);
 
@@ -63,6 +63,10 @@ reposProgram
     .command('add <name> <repo> [template]')
     .action(addRepo);
 
+reposProgram
+    .command('del <name>')
+    .action(removeRepo);
+
 if (process.argv.length === 2) {
     program.outputHelp();
 }
@@ -93,20 +97,20 @@ async function initProject(projectName, opts) {
                 choices: templates
             }]
         );
-        template = selectTmp
+        template = selectTmp;
     }
-    downloadAndGenerate(projectName, template)
+    downloadAndGenerate(projectName, template);
 
 }
 
 function downloadAndGenerate(projectName, template) {
     const repo = getCurrentRepo();
-    const isKfz = repo.templates === KFZ_TEMPLATES
+    const isKfz = repo.templates === KFZ_TEMPLATES;
     const inPlace = !projectName || projectName === '.';
     const name = inPlace ? path.relative('../', process.cwd()) : projectName;
     const tmp = path.join(home, `.${repo.templates}`, template.replace(/[/:]/g, '-')); // 本地存储模板路径
     const to = path.resolve(projectName || '.'); // 目标路径
-    template = isKfz ? `direct:git@git.zuoshouyisheng.com:frontend/fe-cli/${repo.templates}/${template}.git` : `${repo.templates}/${template}`
+    template = isKfz ? `direct:git@git.zuoshouyisheng.com:frontend/fe-cli/${repo.templates}/${template}.git` : `${repo.templates}/${template}`;
 
     const spinner = ora('downloading template');
     spinner.start();
@@ -226,6 +230,27 @@ function addRepo(repoName, repo, template = repoName) {
     };
     setCustomRepos(customRepos);
     logger.log(template + ' : ' + template + '-' + repo);
+}
+
+function removeRepo(repoName) {
+    const allRepos = getRepos();
+    if (!allRepos[repoName]) {
+        console.log('');
+        logger.fatal(`repo ${repoName} is not existed`);
+        return;
+    }
+    const customRepos = getCustomRepos();
+    if (!customRepos.repos[repoName]) {
+        console.log('');
+        logger.fatal(`custom repo ${repoName} is not existed`);
+        return;
+    }
+    delete customRepos.repos[repoName]
+    if (repoName === customRepos.current) {
+        customRepos.current = DEFAULT_REPO
+        logger.log('current repo is ' + repoName + ' : ' + allRepos[repoName].templates + '-' + allRepos[repoName].repos);
+    }
+    setCustomRepos(customRepos);
 }
 
 /**
