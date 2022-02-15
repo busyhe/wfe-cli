@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 /**
  * Created by busyhe on 2021/9/29.
  * Email: busyhe@qq.com
@@ -12,7 +11,7 @@ const chalk = require('chalk');
 const inquirer = require('inquirer');
 const {Command} = require('commander');
 const program = new Command();
-const package = require('./package.json');
+const Package = require('./package.json');
 const {isWindows} = require('./utils');
 const logger = require('./lib/logger');
 const LOCAL_REPOS = require('./repos.json');
@@ -33,7 +32,7 @@ const WFE_CLI_REPOS_RC = path.join(HOME_PATH, '.wfe_cli_repos_rc');
 const DEFAULT_REPO = 'wfe'; // 默认repo
 const KFZ_TEMPLATES = 'fe-templates' // 私有化库地址
 
-program.version(package.version);
+program.version(Package.version);
 
 program.usage('<command> [options]');
 
@@ -44,14 +43,16 @@ program
     .action(initProject);
 
 program
-    .description('list available official templates')
     .command('list')
+    .alias('ls')
+    .description('list available official templates')
     .action(showTemplates);
 
 const reposProgram = program.command('repos');
 
 reposProgram
-    .command('ls')
+    .command('list')
+    .alias('ls')
     .action(showRepos);
 
 reposProgram
@@ -103,7 +104,7 @@ function downloadAndGenerate(projectName, template) {
     const isKfz = repo.templates === KFZ_TEMPLATES
     const inPlace = !projectName || projectName === '.';
     const name = inPlace ? path.relative('../', process.cwd()) : projectName;
-    const tmp = path.join(home, `.${repo.templates}`, template.replace(/[\/:]/g, '-')); // 本地存储模板路径
+    const tmp = path.join(home, `.${repo.templates}`, template.replace(/[/:]/g, '-')); // 本地存储模板路径
     const to = path.resolve(projectName || '.'); // 目标路径
     template = isKfz ? `direct:git@git.zuoshouyisheng.com:frontend/fe-cli/${repo.templates}/${template}.git` : `${repo.templates}/${template}`
 
@@ -128,7 +129,7 @@ async function getRepoTemplates() {
     const currentRepo = getCurrentRepo();
     return axios.get(currentRepo.repos, {}, {
         headers: {
-            'User-Agent': package.name
+            'User-Agent': Package.name
         }
     });
 }
@@ -194,7 +195,7 @@ function useRepo(repoName) {
     const allRepos = getRepos();
     if (!allRepos[repoName]) {
         console.log('');
-        logger.error('Not find repo ' + repoName);
+        logger.fatal('Not find repo ' + repoName);
         return;
     }
     let customRepos = getCustomRepos();
@@ -215,7 +216,7 @@ function addRepo(repoName, repo, template = repoName) {
     const allRepos = getRepos();
     if (allRepos[repoName]) {
         console.log('');
-        logger.error(`repo ${repoName} is existed`);
+        logger.fatal(`repo ${repoName} is existed`);
         return;
     }
     const customRepos = getCustomRepos();
