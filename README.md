@@ -29,8 +29,8 @@ wfe init <template> <projectName>
 wfe repos list
 
 # use repo
-wfe repos use <repo>
+wfe repos use <reponame>
 
 # add repo
-wfe repos add <reponame> <reposUrl>
+wfe repos add <reponame> <reposUrl> <templateGroupName>
 ```
