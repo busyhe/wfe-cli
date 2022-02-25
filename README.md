@@ -19,7 +19,7 @@ yarn global add wfe-cli
 wfe list
 
 # init project
-wfe init <template> <projectName>
+wfe init <projectName> -t <template> 
 ```
 
 ### Repos
