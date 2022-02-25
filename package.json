@@ -1,6 +1,6 @@
 {
     "name": "wfe-cli",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "description": "web frontend build",
     "private": false,
     "publishConfig": {
