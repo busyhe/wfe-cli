@@ -20,6 +20,9 @@ wfe list
 
 # init project
 wfe init <projectName> -t <template> 
+
+# init project with local template and to Test
+wfe init <projectName> -t <TemplatePATH>
 ```
 
 ### Repos

@@ -24,6 +24,8 @@ const {sync: rm} = require('rimraf');
 const download = require('download-git-repo');
 const generate = require('./lib/generate');
 const home = require('user-home');
+const localPath = require('./lib/local-path');
+
 dayjs.extend(relativeTime);
 inquirer.registerPrompt('checkbox-plus', require('inquirer-checkbox-plus-prompt'));
 
@@ -98,9 +100,22 @@ async function initProject(projectName, opts) {
             }]
         );
         template = selectTmp;
+    } else {
+        if (localPath.isLocalPath(template)) {
+            const templatePath = localPath.getTemplatePath(template);
+            if (exists(templatePath)) {
+                generate(projectName, templatePath, path.resolve(projectName), err => {
+                    if (err) logger.fatal(err);
+                    console.log();
+                    logger.success('Generated "%s".', projectName);
+                });
+            } else {
+                logger.fatal('Local template "%s" not found.', template);
+            }
+            return;
+        }
     }
     downloadAndGenerate(projectName, template);
-
 }
 
 function downloadAndGenerate(projectName, template) {
@@ -245,9 +260,9 @@ function removeRepo(repoName) {
         logger.fatal(`custom repo ${repoName} is not existed`);
         return;
     }
-    delete customRepos.repos[repoName]
+    delete customRepos.repos[repoName];
     if (repoName === customRepos.current) {
-        customRepos.current = DEFAULT_REPO
+        customRepos.current = DEFAULT_REPO;
         logger.log('current repo is ' + repoName + ' : ' + allRepos[repoName].templates + '-' + allRepos[repoName].repos);
     }
     setCustomRepos(customRepos);
