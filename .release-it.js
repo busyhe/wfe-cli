@@ -1,6 +1,5 @@
 module.exports = {
     'git': {
-        'changelog': 'npx auto-changelog --stdout --commit-limit false --unreleased --template changelog.hbs',
         'requireCleanWorkingDir': false,
         'requireBranch': false,
         'requireUpstream': true,
@@ -36,7 +35,6 @@ module.exports = {
         'timeout': 10
     },
     'hooks': {
-        'after:bump': 'npx auto-changelog -p',
         'after:release': [
             'echo Successfully released ${name} v${version} to ${repo.repository}.'
         ]
