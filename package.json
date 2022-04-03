@@ -64,7 +64,7 @@
         "release-it": "^14.12.4"
     },
     "engines": {
-        "node": ">=6.0.0"
+        "node": ">=16.0.0"
     },
     "config": {
         "commitizen": {
