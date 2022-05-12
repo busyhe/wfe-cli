@@ -34,6 +34,6 @@ wfe repos list
 # use repo
 wfe repos use <reponame>
 
-# add repo
+# add custom repo
 wfe repos add <reponame> <reposUrl> <templateGroupName>
 ```
