@@ -8,10 +8,7 @@
         "registry": "https://registry.npmjs.org/"
     },
     "preferGlobal": true,
-    "scripts": {
-        "release": "HUSKY=0 release-it",
-        "release:debug": "DEBUG=release-it:* release-it"
-    },
+    "scripts": {},
     "bin": {
         "wfe": "./cli.js"
     },
