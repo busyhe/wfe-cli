@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/wfe-cli/wfe-cli/compare/v1.3.0...v1.3.1) (2022-05-12)
+
+
+### Bug Fixes
+
+* update .gitignore ([96cf0d2](https://github.com/wfe-cli/wfe-cli/commit/96cf0d298f0c366511f642bc5f9eef9fca5334e2))
+
 # [1.3.0](https://github.com/wfe-cli/wfe-cli/compare/v1.2.5...v1.3.0) (2022-05-12)
 
 
