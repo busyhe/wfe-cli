@@ -1,14 +1,19 @@
 {
     "name": "wfe-cli",
     "version": "1.3.0",
-    "description": "web frontend build",
+    "description": "Front end scaffolding tool",
     "private": false,
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
     },
     "preferGlobal": true,
-    "scripts": {},
+    "scripts": {
+        "lint": "eslint .",
+        "postinstall": "husky install",
+        "prepack": "pinst --disable",
+        "postpack": "pinst --enable"
+    },
     "bin": {
         "wfe": "./cli.js"
     },
@@ -24,7 +29,7 @@
     "bugs": {
         "url": "https://github.com/wfe-cli/wfe-cli/issues"
     },
-    "homepage": "https://github.com/wfe-cli/wfe-cli#readme",
+    "homepage": "https://github.com/wfe-cli/wfepinst-cli#readme",
     "dependencies": {
         "async": "^3.2.1",
         "axios": "^0.26.0",
@@ -51,19 +56,31 @@
         "validate-npm-package-name": "^3.0.0"
     },
     "devDependencies": {
+        "@busyhe/eslint-config": "^1.0.0",
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/git": "^10.0.1",
         "chai": "^4.3.4",
         "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^7.32.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-n": "^15.2.3",
+        "eslint-plugin-promise": "^6.0.0",
         "execa": "^5.1.1",
         "husky": "^7.0.2",
         "mocha": "^9.2.0",
+        "pinst": "^3.0.0",
         "semantic-release": "^19.0.2"
     },
     "engines": {
         "node": ">=16.0.0"
+    },
+    "eslintConfig": {
+        "extends": "@busyhe",
+        "parserOptions": {
+            "sourceType": "module",
+            "ecmaVersion" : 2017
+        }
     },
     "config": {
         "commitizen": {
