@@ -50,6 +50,7 @@ program
     .description('list available official templates')
     .action(showTemplates)
 
+// repos command manage multiple sources
 const reposProgram = program.command('repos')
 
 reposProgram

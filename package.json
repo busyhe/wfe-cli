@@ -31,8 +31,8 @@
     },
     "homepage": "https://github.com/wfe-cli/wfepinst-cli#readme",
     "dependencies": {
-        "async": "^3.2.1",
-        "axios": "^0.26.0",
+        "async": "^3.2.4",
+        "axios": "^0.27.2",
         "chalk": "^4.1.2",
         "coffee-script": "1.12.7",
         "commander": "^8.2.0",
@@ -62,16 +62,16 @@
         "chai": "^4.3.4",
         "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
-        "eslint": "^7.32.0",
+        "eslint": "^8.18.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-n": "^15.2.3",
         "eslint-plugin-promise": "^6.0.0",
         "execa": "^5.1.1",
-        "husky": "^7.0.2",
+        "husky": "^8.0.1",
         "lint-staged": "^13.0.2",
         "mocha": "^9.2.0",
         "pinst": "^3.0.0",
-        "semantic-release": "^19.0.2"
+        "semantic-release": "^19.0.3"
     },
     "engines": {
         "node": ">=16.0.0"
