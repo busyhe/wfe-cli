@@ -68,6 +68,7 @@
         "eslint-plugin-promise": "^6.0.0",
         "execa": "^5.1.1",
         "husky": "^7.0.2",
+        "lint-staged": "^13.0.2",
         "mocha": "^9.2.0",
         "pinst": "^3.0.0",
         "semantic-release": "^19.0.2"
@@ -79,8 +80,11 @@
         "extends": "@busyhe",
         "parserOptions": {
             "sourceType": "module",
-            "ecmaVersion" : 2017
+            "ecmaVersion": 2017
         }
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,vue}": "eslint --fix"
     },
     "config": {
         "commitizen": {
