@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/wfe-cli/wfe-cli/compare/v1.3.2...v1.3.3) (2022-07-15)
+
+
+### Bug Fixes
+
+* remove pinst & chnage postinstall to prepare ([78d1428](https://github.com/wfe-cli/wfe-cli/commit/78d1428597ea47790ccd6fc1032676123ec43f2f))
+
 ## [1.3.2](https://github.com/wfe-cli/wfe-cli/compare/v1.3.1...v1.3.2) (2022-07-15)
 
 
