@@ -15,6 +15,12 @@
     "bin": {
         "wfe": "./cli.js"
     },
+    "files": [
+        "lib/",
+        "utils/",
+        "cli.js",
+        "repos.json"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/wfe-cli/wfe-cli.git"
