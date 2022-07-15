@@ -35,7 +35,7 @@
         "axios": "^0.27.2",
         "chalk": "^4.1.2",
         "coffee-script": "1.12.7",
-        "commander": "^8.2.0",
+        "commander": "^9.3.0",
         "consolidate": "^0.16.0",
         "dayjs": "^1.10.7",
         "download-git-repo": "^3.0.2",
@@ -69,7 +69,6 @@
         "execa": "^5.1.1",
         "husky": "^8.0.1",
         "lint-staged": "^13.0.2",
-        "mocha": "^9.2.0",
         "pinst": "^3.0.0",
         "semantic-release": "^19.0.3"
     },

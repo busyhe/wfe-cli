@@ -39,8 +39,8 @@ program.version(Package.version)
 program.usage('<command> [options]')
 
 program
-    .description('generate a new project from a template')
     .command('init <project>')
+    .description('generate a new project from a template')
     .option('-t, --template <template>', 'by template')
     .action(initProject)
 
@@ -69,10 +69,6 @@ reposProgram
 reposProgram
     .command('del <name>')
     .action(removeRepo)
-
-if (process.argv.length === 2) {
-    program.outputHelp()
-}
 
 program.parse(process.argv)
 
