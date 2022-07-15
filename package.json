@@ -10,9 +10,7 @@
     "preferGlobal": true,
     "scripts": {
         "lint": "eslint .",
-        "postinstall": "husky install",
-        "prepack": "pinst --disable",
-        "postpack": "pinst --enable"
+        "prepare": "husky install"
     },
     "bin": {
         "wfe": "./cli.js"
@@ -69,7 +67,6 @@
         "execa": "^5.1.1",
         "husky": "^8.0.1",
         "lint-staged": "^13.0.2",
-        "pinst": "^3.0.0",
         "semantic-release": "^19.0.3"
     },
     "engines": {
