@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/wfe-cli/wfe-cli/compare/v1.3.3...v1.4.0) (2022-07-15)
+
+
+### Features
+
+* reduce file size ([6046f8c](https://github.com/wfe-cli/wfe-cli/commit/6046f8c914533521f6518ad759579538bad38f36))
+
 ## [1.3.3](https://github.com/wfe-cli/wfe-cli/compare/v1.3.2...v1.3.3) (2022-07-15)
 
 
