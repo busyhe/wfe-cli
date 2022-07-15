@@ -163,7 +163,7 @@ async function showTemplates() {
         requestBody.forEach(repo => {
             console.log(
                 '  ' + chalk.yellow('★') +
-                '  ' + chalk.blue(repo.name) +
+                '  ' + chalk.blueBright(repo.name) +
                 ' - ' + repo.description +
                 '  ' + chalk.gray(dayjs(repo.updated_at || repo.last_activity_at).fromNow()))
         })
@@ -195,7 +195,7 @@ function showRepos() {
     Object.keys(allRepos).forEach(function(key) {
         const item = allRepos[key]
         const prefix = current === key ? '* ' : '  '
-        infos.push('  ' + chalk.yellow(prefix) + ' ' + chalk.blue(key) + line(key, len) + item.templates + line(item.templates, templateLen) + item.repos)
+        infos.push('  ' + chalk.yellow(prefix) + ' ' + chalk.blueBright(key) + line(key, len) + item.templates + line(item.templates, templateLen) + item.repos)
     })
     infos.push('')
     infos.forEach(function(info) {
