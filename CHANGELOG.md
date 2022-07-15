@@ -1,3 +1,11 @@
+## [1.3.2](https://github.com/wfe-cli/wfe-cli/compare/v1.3.1...v1.3.2) (2022-07-15)
+
+
+### Bug Fixes
+
+* husky hook will make github release error ([7a4b7f1](https://github.com/wfe-cli/wfe-cli/commit/7a4b7f1a5cf42a90ebdef5265e1330fecb092db7))
+* wfe-cli --help will show repeat ([5e3a12a](https://github.com/wfe-cli/wfe-cli/commit/5e3a12a4a0d6925157de70b8636ab9bb7d01e767))
+
 ## [1.3.1](https://github.com/wfe-cli/wfe-cli/compare/v1.3.0...v1.3.1) (2022-05-12)
 
 
