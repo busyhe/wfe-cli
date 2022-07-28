@@ -13,12 +13,12 @@
         "prepare": "husky install"
     },
     "bin": {
-        "wfe": "./cli.js"
+        "wfe": "src/cli.js"
     },
     "files": [
         "lib/",
-        "utils/",
-        "cli.js",
+        "src/utils/",
+        "src/cli.js",
         "repos.json"
     ],
     "repository": {
@@ -59,7 +59,7 @@
         "validate-npm-package-name": "^3.0.0"
     },
     "devDependencies": {
-        "@busyhe/eslint-config": "^1.0.0",
+        "@busyhe/eslint-config": "^1.0.3",
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/git": "^10.0.1",
         "chai": "^4.3.6",
@@ -76,13 +76,6 @@
     },
     "engines": {
         "node": ">=16.0.0"
-    },
-    "eslintConfig": {
-        "extends": "@busyhe",
-        "parserOptions": {
-            "sourceType": "module",
-            "ecmaVersion": 2017
-        }
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,vue}": "eslint --fix"

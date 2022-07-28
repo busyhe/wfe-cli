@@ -1,6 +1,0 @@
-{
-    "wfe": {
-        "templates": "wfe-templates",
-        "repos": "https://api.github.com/users/wfe-templates/repos"
-    }
-}

@@ -23,10 +23,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@busyhe/eslint-config@^1.0.0":
-  version "1.0.0"
-  resolved "https://npm.zuoshouyisheng.com/@busyhe%2feslint-config/-/eslint-config-1.0.0.tgz#000f453836b1b2c8b338c2c77cd8e5c6b27f1100"
-  integrity sha512-mDEX7QR5j83l/9wrf2NT+Mp14iyYL1Vn/YAXgfp11PlhSJZVyp8d/apPnOIjEeT3qjxlSUvzduOD5N5OTNSYGg==
+"@busyhe/eslint-config@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@busyhe/eslint-config/-/eslint-config-1.0.3.tgz#6a789480bc792a7687e81e4110bce4d8a89ff9de"
+  integrity sha512-oDWqeFlwfFuaUaJdNj8M3jFLjUTDhQe5ceUzC/CUHXHeDPWkqD8c0niAm2XxvULfRS9/nnTobNJKTXvxPrVt/g==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
