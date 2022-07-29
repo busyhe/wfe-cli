@@ -6,3 +6,8 @@
 exports.isWindows = () => {
     return process.platform === 'win32';
 };
+
+exports.line = (str, len) => {
+    const line = new Array(Math.max(2, len - str.length + 2)).join('-');
+    return ' ' + line + ' ';
+};
